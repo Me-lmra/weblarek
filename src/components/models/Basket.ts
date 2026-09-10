@@ -1,40 +1,38 @@
 import { IProduct } from '../../types';
 
 export class Basket {
-    private _selectedItems: IProduct[];
+    private selectedItems: IProduct[];
 
     constructor() {
-        this._selectedItems = [];
+        this.selectedItems = [];
     }
 
     getItems(): IProduct[] {
-        return this._selectedItems;
+        return this.selectedItems;
     }
 
-    setItems(item: IProduct): void {
-        this._selectedItems.push(item);
+    addItem(item: IProduct): void {
+        this.selectedItems.push(item);
     }
 
     delete(id: string): void {
-        if (this._selectedItems) {
-            this._selectedItems = this._selectedItems.filter(itemId => itemId.id !== id);
-        }
+        this.selectedItems = this.selectedItems.filter(product => product.id !== id);
     }
 
     clean(): void {
-        this._selectedItems = [];
+        this.selectedItems = [];
     }
 
-    getnumberItems(): number {
-        return this._selectedItems.length
+    getItemsCount(): number {
+        return this.selectedItems.length
     }
 
-    hasnumberItems(id: string): boolean {
-        return this._selectedItems.some(element => id === element.id);
+    hasItem(id: string): boolean {
+        return this.selectedItems.some(element => id === element.id);
     }
 
-    allPrices(): number {
-        return this._selectedItems.reduce((acc: number, item: IProduct): number => {
+    getTotalPrice(): number {
+        return this.selectedItems.reduce((acc: number, item: IProduct): number => {
             acc = acc + (item.price ?? 0);
             return acc
         }, 0)

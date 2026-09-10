@@ -14,8 +14,10 @@ export interface IProduct {
     description: string;
 }
 
+export type TPayment = 'card' | 'cash'
+
 export interface IBuyer {
-    payment: 'card' | 'cash' | '';
+    payment: TPayment | '';
     address: string;
     email: string;
     phone: string;

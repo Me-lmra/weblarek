@@ -1,31 +1,31 @@
 import { IProduct } from '../../types';
 
 export class Products {
-    private _items: IProduct[];
-    private _selectedItem: IProduct | null;
+    private items: IProduct[];
+    private selectedItem: IProduct | null;
 
     constructor() {
-        this._items = [];
-        this._selectedItem = null;
+        this.items = [];
+        this.selectedItem = null;
     }
 
     setItems(products: IProduct[]): void {
-        this._items = products;
+        this.items = products;
     }
 
     getItems(): IProduct[] {
-        return this._items;
+        return this.items;
     }
 
     getItemById(id: string): IProduct | undefined {
-        return this._items.find(item => item.id === id);
+        return this.items.find(item => item.id === id);
     }
 
     setSelectedItem(product: IProduct | null): void {
-        this._selectedItem = product;
+        this.selectedItem = product;
     }
 
     getSelectedItem(): IProduct | null {
-        return this._selectedItem;
+        return this.selectedItem;
     }
 }

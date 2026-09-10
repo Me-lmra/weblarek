@@ -1,66 +1,47 @@
 import { IBuyer } from '../../types';
 
+export const DEFAULT_BUYER_DATA: IBuyer = {
+    payment: '',
+    address: '',
+    email: '',
+    phone: '',
+};
+
 export class Buyer {
-    private _buyerData: IBuyer;
-    private _errors: string;
+    private buyerData: IBuyer;
 
     constructor() {
-        this._buyerData = {
-            payment: '',
-            address: '',
-            email: '',
-            phone: '',
-        };
-        this._errors = '';
+        this.buyerData = {...DEFAULT_BUYER_DATA};
     }
 
     setBuyerData(data: Partial<IBuyer>): void {
-        this._buyerData = {...this._buyerData, ...data};
+        this.buyerData = {...this.buyerData, ...data};
     }
 
     getBuyerData(): IBuyer {
-        return this._buyerData;
+        return this.buyerData;
     }
 
     clearBuyerData(): void {
-        this._buyerData = {
-            payment: '',
-            address: '',
-            email: '',
-            phone: '',
-        };
-
-        this._errors = '';
+        this.buyerData = {...DEFAULT_BUYER_DATA};
     }
 
-    validateBuyer(): boolean {
-        this._errors = '';
-        if (this._buyerData.payment === '') {
-            this._errors = "Необходимо указать способ оплаты";
-            return false;
-        }
-        if (this._buyerData.address === '') {
-            this._errors = "Необходимо указать адрес";
-            return false;
-        }
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    validate(): Partial<Record<keyof IBuyer, string>> {
+        const errors: Partial<Record<keyof IBuyer, string>> = {};
 
-        if (this._buyerData.email === '') {
-            this._errors = "Необходимо указать адрес электронной почты";
-            return false;
-        } else if (!emailRegex.test(this._buyerData.email)) {
-            this._errors = "Некорректный формат электронной почты (пример: user@mail.ru)";
-            return false;
+        if (this.buyerData.payment === '') {
+            errors.payment = "Необходимо указать способ оплаты";
         }
-        if (this._buyerData.phone === '') {
-            this._errors = "Необходимо указать номер телефона";
-            return false;
+        if (this.buyerData.address === '') {
+            errors.address = "Необходимо указать адрес";
+        }
+        if (this.buyerData.email === '') {
+            errors.email = "Необходимо указать адрес электронной почты";
+        }
+        if (this.buyerData.phone === '') {
+            errors.phone = "Необходимо указать номер телефона";
         }
 
-        return true;
-    }
-
-    getErrors(): string {
-        return this._errors;
+        return errors;
     }
 }
