@@ -41,7 +41,6 @@ const buyerModel = new Buyer();
 
 buyerModel.setBuyerData({ address: 'Улица Пушкина' });
 console.log('Данные покупателя до очистки: ', buyerModel.getBuyerData());
-console.log('Данные покупателя: ', buyerModel.getBuyerData());
 console.log('Валидация: ', buyerModel.validate());
 buyerModel.clearBuyerData();
 console.log('Данные покупателя после очистки: ', buyerModel.getBuyerData());
