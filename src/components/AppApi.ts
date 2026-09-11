@@ -1,5 +1,4 @@
-import { IApi } from '../types';
-import { IProductResponse, IOrderRequest, IOrderResponse } from '../types';
+import { IApi, IProductResponse, IOrderRequest, IOrderResponse } from '../types';
 
 
 export class AppApi {
