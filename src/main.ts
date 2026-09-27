@@ -1,3 +1,6 @@
+// Добрый вечер! Большое спасибо за ревью, помощь и объяснения!
+
+
 import './scss/styles.scss';
 
 import { Products } from './components/models/Products';
@@ -162,7 +165,6 @@ events.on('order.address:change', (data: { field: string; value: string }) => {
 // кнопок оплаты
 events.on('order.payment:change', (data: { target: 'card' | 'cash' }) => {
     buyerModel.setOrderField('payment', data.target);
-    orderFormView.payment = data.target; // подсвечиваем кнопку
 });
 
 // текст в инпут email
@@ -208,14 +210,6 @@ events.on('order:submit', () => {
 
 // клик «Оплатить»
 events.on('contacts:submit', () => {
-    const allErrors = buyerModel.validate();
-    const contactsErrors = [allErrors.email, allErrors.phone].filter(Boolean);
-
-    if (contactsErrors.length > 0) {
-        contactsFormView.errors = contactsErrors.join('. ');
-        return;
-    }
-
     const finalOrder: IOrderRequest = {
         ...buyerModel.getBuyerData(),
         items: basketModel.getItems().map(item => item.id),
