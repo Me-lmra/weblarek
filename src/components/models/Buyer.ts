@@ -2,6 +2,8 @@ import { IBuyer } from '../../types';
 import { IEvents } from "../base/Events";
 import { TPayment } from "../../types";
 
+export type TByuer = Partial<Record<keyof IBuyer, string>>;
+
 export const DEFAULT_BUYER_DATA: IBuyer = {
     payment: '',
     address: '',
@@ -42,8 +44,8 @@ export class Buyer {
         this.events.emit('buyer:changed', this.validate());
     }
 
-    validate(): Partial<Record<keyof IBuyer, string>> {
-        const errors: Partial<Record<keyof IBuyer, string>> = {};
+    validate(): TByuer{
+        const errors: TByuer = {};
 
         if (this.buyerData.payment === '') {
             errors.payment = "Необходимо указать способ оплаты";

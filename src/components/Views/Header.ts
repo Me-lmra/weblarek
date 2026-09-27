@@ -14,7 +14,7 @@ export class Header extends Component<IHeader> {
         this.counterElement = ensureElement<HTMLButtonElement>('.header__basket-counter', this.container);
 
         this.basketButton.addEventListener('click', () => {
-            this.events.emit('basket: open');
+            this.events.emit('basket:open');
         });
     }
 

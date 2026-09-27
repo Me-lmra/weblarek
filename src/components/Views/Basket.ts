@@ -18,6 +18,7 @@ export class ModalBasket extends Component<IBasketView> {
         this.orderButton.addEventListener('click', () => {
             this.events.emit('basket:order');
         });
+        this.orderButton.disabled = true;
     }
 
     set items(value: HTMLElement[]) {
