@@ -37,3 +37,33 @@ export interface IOrderResponse {
     id: string;          // уникальный id созданного заказа на сервере
     total: number;       // сумма
 }
+
+export interface IHeader {
+    counter: number;
+}
+
+export interface IModalData {
+    content: HTMLElement;
+}
+
+export interface ICardActions {
+    onClick: (event: MouseEvent) => void;
+}
+
+export interface ICard {
+    id: string;
+    title: string;
+    price: number | null;
+    category?: string;
+    image?: string;
+    description?: string;
+}
+
+export interface IBasketView {
+    items: HTMLElement[];
+    total: number;
+}
+
+export interface ISuccessOrder {
+    total: number;
+}

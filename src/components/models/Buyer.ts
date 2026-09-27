@@ -1,4 +1,6 @@
 import { IBuyer } from '../../types';
+import { IEvents } from "../base/Events";
+import { TPayment } from "../../types";
 
 export const DEFAULT_BUYER_DATA: IBuyer = {
     payment: '',
@@ -10,13 +12,25 @@ export const DEFAULT_BUYER_DATA: IBuyer = {
 export class Buyer {
     private buyerData: IBuyer;
 
-    constructor() {
+    constructor(protected events: IEvents) {
         this.buyerData = {...DEFAULT_BUYER_DATA};
     }
 
-    setBuyerData(data: Partial<IBuyer>): void {
-        this.buyerData = {...this.buyerData, ...data};
+
+    setOrderField(field: keyof IBuyer, value: string): void {
+        if (field === 'payment') {
+            this.buyerData[field] = value as TPayment;
+        } else {
+            this.buyerData[field] = value;
+        }
+
+
+        this.events.emit('buyer:changed', this.validate());
     }
+
+    /*setBuyerData(data: Partial<IBuyer>): void {
+        this.buyerData = {...this.buyerData, ...data};
+    }*/
 
     getBuyerData(): IBuyer {
         return this.buyerData;
@@ -24,6 +38,8 @@ export class Buyer {
 
     clearBuyerData(): void {
         this.buyerData = {...DEFAULT_BUYER_DATA};
+
+        this.events.emit('buyer:changed', this.validate());
     }
 
     validate(): Partial<Record<keyof IBuyer, string>> {
