@@ -1,6 +1,3 @@
-// Добрый вечер! Большое спасибо за ревью, помощь и объяснения!
-
-
 import './scss/styles.scss';
 
 import { Products } from './components/models/Products';
@@ -153,7 +150,6 @@ events.on('basket:open', () => {
 
 // кнопка "Оформить"
 events.on('basket:order', () => {
-    buyerModel.clearBuyerData();
     modalView.content = orderFormView.render();
 });
 
